@@ -1,0 +1,38 @@
+{% if data_list %}
+
+    {% for data in data_list %}
+
+    <ul>
+
+    <li>
+        <h2>Temperatura:{{ data.temperatura }}</h2>
+        <h2>Umidita:{{ data.umidita }}</h2>
+        <h2>Pressione:{{ data.pressione  }} </h2>
+	<h2>Pioggia:{{ data.pioggia   }} </h2>
+	<h2>Posizione:{{ data.posizione   }} </h2>
+           <form action="{% url 'modelformsESPtesi:espdata-delete' data.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Delete</button>
+        </form>
+           <form action="{% url 'modelformsESPtesi:espdata-update' data.id  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Update</button>
+        </form>
+
+
+    </li>
+
+
+    </ul>
+
+{% endfor %}
+
+    {% else %}
+    <h1>No data entries found on the database.</h1>
+
+
+{% endif %}
+     <form action="{% url 'modelformsESPtesi:espdata-entry'  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Make a Product entry here</button>
+        </form>
